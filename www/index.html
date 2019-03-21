@@ -1,0 +1,294 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+				border: 0;
+			}
+			html, body{
+				height: 100%;
+			}
+			body{
+				font-family: sans-serif;
+				/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#dedede+0,ffffff+100 */
+				background: #dedede; /* Old browsers */
+				background: -moz-linear-gradient(top, #dedede 0%, #ffffff 100%); /* FF3.6-15 */
+				background: -webkit-linear-gradient(top, #dedede 0%,#ffffff 100%); /* Chrome10-25,Safari5.1-6 */
+				background: linear-gradient(to bottom, #dedede 0%,#ffffff 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dedede', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+			}
+			.coins{
+				position: sticky;
+				top: 0;
+				font-size: 7rem;
+				text-align: center;
+				margin: 0;
+			}
+
+			.acoes-container{
+				display: flex;
+			}
+
+			.action-btn{
+				align-self: center;
+				flex: 1;
+				margin: 4px;
+				padding: 14px 6px 8px;
+				text-align: center;
+				cursor: pointer;
+				background-size: cover;
+				background-repeat: no-repeat;
+				border-radius: 6px;
+				color: #fff;
+				font-size: 0.6rem;
+				height: 50px;
+				/*line-height: 50px;*/
+			}
+
+			.action-btn span{
+				font-size: 1.5rem;
+				font-weight: 700;
+			}
+
+			.actions-type{
+				text-align: center;
+				font-weight: 700;
+				margin-top: 4px;
+				margin-bottom: 8px;
+			}
+
+			.action-renda{
+				border: 1px solid #999;
+				background: #999;
+			}
+
+			.action-ajuda{
+				border: 1px solid #333;
+				background: #333;
+			}
+
+			.action-coup{
+				border: 1px solid #fcbd2c;
+				background: #fcbd2c;
+			}
+
+			.action-tax{
+				background-image: url('duque.jpg');
+				border: 1px solid #83245b;
+				//background: #83245b;
+			}
+
+			.action-kill{
+				background-image: url('assassino.jpg');
+				border: 1px solid #c61115;
+				//background: #c61115;
+			}
+
+			.action-extorquir{
+				background-image: url('capitao.jpg');
+				border: 1px solid #1973e8;
+				//background: #1973e8;
+			}
+
+			.extorquir, .desextorquir{
+				position: absolute;
+				top: 40px;
+				width: 50;
+				height: 50;
+				color: #fff;
+				font-weight: 700;
+				text-align: center;
+				padding-top: 14px;
+				box-sizing: border-box;
+				transition: 0.2s;
+				z-index: 1;
+			}
+
+			.extorquir{
+				left: 0;
+				background: #c61115;
+				margin-left: -50px;
+			}
+
+			.desextorquir{
+				right: 0;
+				background: #25c413;
+				margin-right: -50px;
+			}
+
+			.extorquir.active-btn{ margin-left: 0; }
+			.desextorquir.active-btn{ margin-right: 0; }
+
+			.reset{
+				display: block;
+				padding: 10px;
+				width: 100px;
+				background: #999;
+				margin: 20px auto 0;
+				border-radius: 6px;
+				text-align: center;
+			}
+
+			.signature{
+				width: 100%;
+				text-align: center;
+				position: absolute;
+				bottom: 6px;
+				font-size: 10px;
+			}
+		</style>
+		<script src="./jquery.min.js"></script>
+		<script>
+			var coins = 2;
+			$(document).ready(function(){
+				$('.coins').text(coins);
+
+				$('.coins').click(function(){
+					$('.extorquir').toggleClass('active-btn');
+					$('.desextorquir').toggleClass('active-btn');
+				});
+
+				//RENDA
+				$('.action-renda').click(function(){
+					coins = parseInt($('.coins').text());
+					if(coins<10){
+						coins++;
+						$('.coins').text(coins);
+					}
+					else{
+						alert('Com 10 ou mais moedas, é obrigatório aplicar o golpe em um jogador!');
+					}
+				});
+
+				//AJUDA EXTERNA
+				$('.action-ajuda').click(function(){
+					coins = parseInt($('.coins').text());
+					if(coins<10){
+						coins+=2;
+						$('.coins').text(coins);
+					}
+					else{
+						alert('Com 10 ou mais moedas, é obrigatório aplicar o golpe em um jogador!');
+					}
+				});
+
+				//GOLPE
+				$('.action-coup').click(function(){
+					coins = parseInt($('.coins').text());
+					if(coins>=7){
+						coins-=7;
+						$('.coins').text(coins);
+					}
+					else{
+						alert('Precisa de 7 moedas para dar golpe, seu ladrão!');
+					}
+				});
+
+				//TAXA
+				$('.action-tax').click(function(){
+					coins = parseInt($('.coins').text());
+					if(coins<10){
+						coins+=3;
+						$('.coins').text(coins);
+					}
+					else{
+						alert('Com 10 ou mais moedas, é obrigatório aplicar o golpe em um jogador!');
+					}
+				});
+
+				//ASSASSINAR
+				$('.action-kill').click(function(){
+					coins = parseInt($('.coins').text());
+					if(coins<10){
+						if(coins>=3){
+							coins-=3;
+							$('.coins').text(coins);
+						}
+						else{
+							alert('São necessárias mais 3 moedas para assassinar!');
+						}
+					}
+					else{
+						alert('Com 10 ou mais moedas, é obrigatório aplicar o golpe em um jogador!');
+					}
+				});
+
+				//EXTORQUIR
+				$('.action-extorquir').click(function(){
+					coins = parseInt($('.coins').text());
+					if(coins<10){
+						coins+=2;
+						$('.coins').text(coins);
+					}
+					else{
+						alert('Com 10 ou mais moedas, é obrigatório aplicar o golpe em um jogador!');
+					}
+				});
+
+				//SER EXTORQUIDO
+				$('.extorquir').click(function(){
+					coins = parseInt($('.coins').text());
+					if(coins>1){
+						coins-=2;
+						$('.coins').text(coins);
+					}
+					else{
+						if(coins==1){
+							coins-=1;
+							$('.coins').text(coins);
+						}
+						else{
+							alert('Não existem moedas para serem extorquidas');
+						}
+					}
+				});
+
+				//DESEXTORQUIR
+				$('.desextorquir').click(function(){
+					coins = parseInt($('.coins').text());
+					coins+=2;
+					$('.coins').text(coins);
+				});
+
+				$('.reset').click(function(){
+					coins = parseInt($('.coins').text());
+					coins=2;
+					$('.coins').text(coins);
+				})
+			});
+		</script>
+	</head>
+	<body>
+		<div style="width: 100%; overflow: hidden; position: relative;">
+			<div class="extorquir">-2</div>
+			<div class="desextorquir">+2</div>
+			<h1 class="coins">2</h1>
+		</div>
+
+
+		<p class="actions-type">Ações Gerais</p>
+		<div class="acoes-container">
+			<div class="action-btn action-renda"><span>+1</span><br>Renda</div>
+			<div class="action-btn action-ajuda"><span>+2</span><br>Ajuda Externa</div>
+			<div class="action-btn action-coup"><span>-7</span><br>Golpe de Estado</div>
+		</div>
+
+		<p class="actions-type" style="margin-top: 30px;">Ações de Personagem</p>
+		<div class="acoes-container">
+			<div class="action-btn action-tax"><span>+3</span><br>Taxa</div>
+			<div class="action-btn action-kill"><span>-3</span><br>Assassinar</div>
+			<div class="action-btn action-extorquir"><span>+2</span><br>Extorquir</div>
+		</div>
+
+		<div class="reset">
+			Reset
+		</div>
+
+		<div class="signature">
+			Criado por Mateus Martos
+		</div>
+	
+
+</body></html>
