@@ -6,6 +6,12 @@ Install Cordova in the Node by npm
 npm i cordova -g
 ```
 
+Install 
+
+```shell
+npm i
+```
+
 Add plataform browser
 
 ```shell
